@@ -43,7 +43,7 @@ function Reg_Cliente(valor){
 
             //Solicitud Listado de Departamentos RESTful
             $.ajax({
-                url: "http://localhost/RetoBBVA/src/path/Ubigeo.php/api/listarDepartamento",
+                url: "src/path/Ubigeo.php/api/listarDepartamento",
                 ContentType:"application/json; charset=utf-8",
                 success: function(response){           
                     myObj = JSON.parse(response);
@@ -110,10 +110,10 @@ function InsertarCliente(codcliente){
     }
     if(sendCodcliente == ''){
         sendType = "POST";
-        sendURL = "http://localhost/RetoBBVA/src/path/Cliente.php/api/Cliente/Insertar";
+        sendURL = "src/path/Cliente.php/api/Cliente/Insertar";
     }else{
         sendType = "PUT";
-        sendURL = "http://localhost/RetoBBVA/src/path/Cliente.php/api/Cliente/Modificar/"+sendCodcliente;
+        sendURL = "src/path/Cliente.php/api/Cliente/Modificar/"+sendCodcliente;
     }
     $.ajax({
     	type: sendType,
@@ -132,7 +132,7 @@ function InsertarCliente(codcliente){
 function Carga_Provincia(departamento){
     $.ajax({
         ContentType:"application/json; charset=utf-8",
-        url: "http://localhost/RetoBBVA/src/path/Ubigeo.php/api/listarProvincia/"+departamento,
+        url: "src/path/Ubigeo.php/api/listarProvincia/"+departamento,
         success: function(response){
             myObjProvincia = JSON.parse(response);
             for(x in myObjProvincia){
@@ -159,7 +159,7 @@ function Carga_Provincia(departamento){
             
 function Carga_Distrito(provincia){
     $.ajax({
-        url: "http://localhost/RetoBBVA/src/path/Ubigeo.php/api/listarDistrito/"+provincia,
+        url: "src/path/Ubigeo.php/api/listarDistrito/"+provincia,
         success: function(response){
             myObj = JSON.parse(response);
             for(x in myObj){
@@ -197,7 +197,7 @@ function ListarCliente(){
         $("#card").html(datos);
             
             $.ajax({
-                url: "http://localhost/RetoBBVA/src/path/Cliente.php/api/listarCliente"
+                url: "src/path/Cliente.php/api/listarCliente"
             }).then(function(data) {
              
 
@@ -268,7 +268,7 @@ function EliminarCliente(){
     }
     $.ajax({
     	type: "DELETE",
-        url: "http://localhost/RetoBBVA/src/path/Cliente.php/api/Cliente/Eliminar/"+clientSelected,
+        url: "src/path/Cliente.php/api/Cliente/Eliminar/"+clientSelected,
         ContentType:"application/json; charset=utf-8",
         success: function(response){           
            swal("Correcto!!", response, "success");
