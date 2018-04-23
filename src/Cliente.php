@@ -14,14 +14,12 @@ $app->get('/api/listarCliente', function(Request $request, Response $response){
     try{
         // Instanciar la base de datos
         $db = new db();
-
-        // Conexión
         $db = $db->conectar();
         $ejecutar = $db->query($consulta);
         $clientes = $ejecutar->fetchAll(PDO::FETCH_OBJ);
         $db = null;
 
-        //Exportar y mostrar en formato JSON
+        //Exportar resultado en JSON
         echo json_encode($clientes);
 
     } catch(PDOException $e){
@@ -29,3 +27,24 @@ $app->get('/api/listarCliente', function(Request $request, Response $response){
     }
 });
 
+//Obtener detalle de Cliente
+$app->get('/api/detalleCliente/{id}', function(Request $request, Response $response){
+    $id = $request->getAttribute('id');
+    $consulta = "SELECT * FROM TABCLIENTE WHERE CODCLIENTE = '$id'";
+    try{
+        // Instanciar la base de datos
+        $db = new db();
+        $db = $db->conectar();
+        $ejecutar = $db->query($consulta);
+        $cliente = $ejecutar->fetchAll(PDO::FETCH_OBJ);
+        $db = null;
+        echo json_encode($cliente);
+        
+    } catch(PDOException $e){
+        echo '{"error": {"text": '.$e->getMessage().'}';
+    }
+});
+
+
+
+$app->run();
