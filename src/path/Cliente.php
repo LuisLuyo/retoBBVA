@@ -14,12 +14,14 @@ $app->get('/api/listarCliente', function(Request $request, Response $response){
     try{
         // Instanciar la base de datos
         $db = new db();
+
+        // Conexión
         $db = $db->conectar();
         $ejecutar = $db->query($consulta);
         $clientes = $ejecutar->fetchAll(PDO::FETCH_OBJ);
         $db = null;
 
-        //Exportar resultado en JSON
+        //Exportar y mostrar en formato JSON
         echo json_encode($clientes);
 
     } catch(PDOException $e){
@@ -27,17 +29,23 @@ $app->get('/api/listarCliente', function(Request $request, Response $response){
     }
 });
 
-//Obtener detalle de Cliente
+//Obtener un solo cliente
 $app->get('/api/detalleCliente/{id}', function(Request $request, Response $response){
+
     $id = $request->getAttribute('id');
+
     $consulta = "SELECT * FROM TABCLIENTE WHERE CODCLIENTE = '$id'";
     try{
         // Instanciar la base de datos
         $db = new db();
+
+        // Conexión
         $db = $db->conectar();
         $ejecutar = $db->query($consulta);
         $cliente = $ejecutar->fetchAll(PDO::FETCH_OBJ);
         $db = null;
+
+        //Exportar y mostrar en formato JSON
         echo json_encode($cliente);
         
     } catch(PDOException $e){
@@ -55,7 +63,10 @@ $app->post('/api/Cliente/Insertar', function(Request $request, Response $respons
     $query = "INSERT INTO TABCLIENTE (NOMBRES, FECHANAC, UBIGEO, DIRECCION) VALUES
     (:nombres, STR_TO_DATE(:fechanac, '%d/%m/%Y'), :ubigeo, :direccion)";
     try{
+        // Instanciar la base de datos
         $db = new db();
+
+        // Conexión
         $db = $db->conectar();
         $stmt = $db->prepare($query);
         $stmt->bindParam(':nombres', $nombres);
@@ -69,7 +80,7 @@ $app->post('/api/Cliente/Insertar', function(Request $request, Response $respons
     }
 });
 
-// Modificar Cliente
+// Actualizar Cliente
 $app->put('/api/Cliente/Modificar/{codcliente}', function(Request $request, Response $response){
     $codcliente = $request->getAttribute('codcliente');
     $nombres = $request->getParam('nombres');
@@ -82,10 +93,13 @@ $app->put('/api/Cliente/Modificar/{codcliente}', function(Request $request, Resp
                FECHANAC 	   = STR_TO_DATE(:fechanac, '%d/%m/%Y'),
                UBIGEO          = :ubigeo,
                DIRECCION       = :direccion
-           	WHERE CODCLIENTE    = $codcliente";
+           WHERE CODCLIENTE    = $codcliente";
 
     try{
+        // Instanciar la base de datos
         $db = new db();
+
+        // Conexion
         $db = $db->conectar();
         $stmt = $db->prepare($query);
         $stmt->bindParam(':nombres', $nombres);
@@ -105,7 +119,10 @@ $app->delete('/api/Cliente/Eliminar/{codcliente}', function(Request $request, Re
     $codcliente = $request->getAttribute('codcliente');
     $sql = "DELETE FROM TABCLIENTE WHERE CODCLIENTE = $codcliente";
     try{
+        // Instanciar la base de datos
         $db = new db();
+
+        // Conexion
         $db = $db->conectar();
         $stmt = $db->prepare($sql);
         $stmt->execute();

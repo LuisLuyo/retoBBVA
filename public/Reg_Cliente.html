@@ -1,0 +1,42 @@
+<span class="contact2-form-title">Registro de Cliente</span>
+    <div class="form-group">
+      <input type="text" class="form-control sr-only" id="codcliente">
+    </div>
+    <div class="form-group">
+      <label for="nombres">*Nombres:</label>
+      <input type="text" class="form-control" id="nombres" required>
+    </div>
+    <div class="form-group">
+      <label for="fechanac">*Fecha Nacimiento:</label>
+      <div class='input-group date' id='datepicker_fechanac'>
+          <input type="text" class="form-control" id="fechanac" required>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+      </div>
+    </div>
+    <div class="form-group">
+        <label for="coddepa">*Departamento:</label>
+        <select class="form-control" id="coddepa" required>
+            <option value='00'>Seleccione...</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="codprov">*Provincia:</label>
+        <select class="form-control" id="codprov">
+            <option value='00'>Seleccione...</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="coddist">*Distrito:</label>
+        <select class="form-control" id="coddist">
+            <option value='00'>Seleccione...</option>
+        </select>
+    </div>
+    <div class="form-group">
+      <label for="direccion">*Dirección:</label>
+      <input type="text" class="form-control" id="direccion" required>
+    </div>
+    <button type="submit" class="btn btn-default" id="btninsertar" onclick="InsertarCliente(0);">Guardar</button>
+    <button type="submit" class="btn btn-default" id="btnconsultar" onclick="ListarCliente();">Consultar</button>
+    <button type="submit" class="btn btn-default" id="btncerrar" onclick="CerrarApp();">Cerrar</button>
