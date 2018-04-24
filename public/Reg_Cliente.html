@@ -1,10 +1,10 @@
-<span class="contact2-form-title">Registro de Cliente</span>
+<h3>Registro de Cliente</h3>
     <div class="form-group">
-      <input type="text" class="form-control sr-only" id="codcliente">
+        <input type="text" class="form-control sr-only" id="codcliente">
     </div>
     <div class="form-group">
       <label for="nombres">*Nombres:</label>
-      <input type="text" class="form-control" id="nombres" required>
+      <input type="text" class="form-control" id="nombres" required maxlength="50">
     </div>
     <div class="form-group">
       <label for="fechanac">*Fecha Nacimiento:</label>
@@ -35,7 +35,7 @@
     </div>
     <div class="form-group">
       <label for="direccion">*Dirección:</label>
-      <input type="text" class="form-control" id="direccion" required>
+      <input type="text" class="form-control" id="direccion" maxlength="50" required>
     </div>
     <button type="submit" class="btn btn-default" id="btninsertar" onclick="InsertarCliente(0);">Guardar</button>
     <button type="submit" class="btn btn-default" id="btnconsultar" onclick="ListarCliente();">Consultar</button>

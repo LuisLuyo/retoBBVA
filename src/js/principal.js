@@ -8,8 +8,10 @@ var distSelected = '';
 var direcSelected = '';
 
 function Principal(){
+    $("#card").html('');
+    $('#card').html('<div><img src="lib/img/loadingpage.gif"/></div>');
     $.post('public/Login.html',function(datos){
-            $("#card").html(datos);
+            $("#card").fadeIn(1000).html(datos);
     });
 }
 
@@ -31,8 +33,9 @@ function Reg_Cliente(valor){
        accion = 0; 
     }
     $("#card").html('');
+    $('#card').html('<div><img src="lib/img/loadingpage.gif"/></div>');
     $.post('public/Reg_Cliente.html',function(datos){  
-        $("#card").html(datos);
+        $("#card").fadeIn(1000).html(datos);
             //Mascara Calendario
             $('#datepicker_fechanac').datepicker({
                 autoclose:true,
@@ -194,17 +197,19 @@ function Carga_Distrito(provincia){
 }
 
 function CerrarApp(){
+    $("#card").html('');
+    $('#card').html('<div><img src="lib/img/loadingpage.gif"/></div>');
     $.post('index.php',function(datos){
-    	$("#card").html('');
-	    $("#card").html(datos);
+        $("#card").fadeIn(1000).html(datos);
     });
 
 }
 
 function ListarCliente(){
     $("#card").html('');
+    $('#card').html('<div><img src="lib/img/loadingpage.gif"/></div>');
     $.post('public/List_Cliente.html',function(datos){
-        $("#card").html(datos);
+        $("#card").fadeIn(1000).html(datos);
             
             $.ajax({
                 url: "src/path/Cliente.php/api/listarCliente"

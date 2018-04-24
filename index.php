@@ -23,8 +23,8 @@
 
         <script type="text/javascript" src="src/js/principal.js"></script>
     </head>
-    <div class="container" style="margin:auto">
-        <div class="card card-container" id="card" style=""></div>
+    <div class="container align-middle">
+        <div class="card card-container" id="card"></div>
     </div>
     <script type="text/javascript">
         $(function(){

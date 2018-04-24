@@ -9,7 +9,7 @@ $app = new \Slim\App;
 
 //Obtener todos los clientes
 $app->get('/api/listarCliente', function(Request $request, Response $response){
-    $consulta = "SELECT t1.CODCLIENTE,t1.NOMBRES,t1.FECHANAC, t2.DEPARTAMENTO,t2.PROVINCIA,t2.DISTRITO,t1.DIRECCION FROM TABCLIENTE t1
+    $consulta = "SELECT t1.CODCLIENTE AS ID,t1.NOMBRES,t1.FECHANAC, t2.DEPARTAMENTO,t2.PROVINCIA,t2.DISTRITO,t1.DIRECCION FROM TABCLIENTE t1
                 LEFT JOIN GENUBIGEO t2 ON t1.UBIGEO = t2.CODUBIGEO ORDER BY t1.CODCLIENTE";
     try{
         // Instanciar la base de datos
