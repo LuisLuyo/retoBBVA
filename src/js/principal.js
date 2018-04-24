@@ -117,15 +117,17 @@ function InsertarCliente(codcliente){
     if(sendCodcliente == ''){
         sendType = "POST";
         sendURL = "src/path/Cliente.php/api/Cliente/Insertar";
+        sendContentType = "application/json; charset=utf-8";
     }else{
         sendType = "PUT";
         sendURL = "src/path/Cliente.php/api/Cliente/Modificar/"+sendCodcliente;
+        sendContentType = "application/x-www-form-urlencoded";
     }
     $.ajax({
     	type: sendType,
         url: sendURL,
-        data:{nombres:sendNombres,fechanac:sendFechanac, ubigeo:sendUbigeo, direccion:sendDireccion},
-        ContentType:"application/json; charset=utf-8",
+        data: {nombres:sendNombres,fechanac:sendFechanac, ubigeo:sendUbigeo, direccion:sendDireccion},
+        ContentType: sendContentType,
         success: function(response){           
             swal("Correcto!!", response, "success");
             $('#codcliente').val('');
