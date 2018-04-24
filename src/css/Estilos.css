@@ -147,3 +147,6 @@ body, html {
 table{
     cursor: pointer;
 }
+table tr:hover:not(.firstrow) {
+    background-color: #ffff99;
+}

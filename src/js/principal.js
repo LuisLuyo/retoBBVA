@@ -16,7 +16,7 @@ function Principal(){
 function Reg_Cliente(valor){
     accion = valor;
     if(accion == 0){
-        if($('#inputUser').val() != "admin" && $('#inputPassword').val() == "123"){
+        if((($('#inputUser').val() == "" && $('#inputPassword').val() == "")) || ($('#inputUser').val().toUpperCase() != "ADMIN" && $('#inputPassword').val() == "123")){
             swal("Error!!", "Usuario Incorrecto, utilize el usuario genérico!", "error");
             return false;
         }
@@ -26,6 +26,9 @@ function Reg_Cliente(valor){
             swal("Advertencia!!", "Para modificar seleccione un Cliente...", "warning");
             return false;
         }
+    }
+    else if(accion == 2){
+       accion = 0; 
     }
     $("#card").html('');
     $.post('public/Reg_Cliente.html',function(datos){  
@@ -121,7 +124,14 @@ function InsertarCliente(codcliente){
         data:{nombres:sendNombres,fechanac:sendFechanac, ubigeo:sendUbigeo, direccion:sendDireccion},
         ContentType:"application/json; charset=utf-8",
         success: function(response){           
-           swal("Correcto!!", response, "success");
+            swal("Correcto!!", response, "success");
+            $('#codcliente').val('');
+            $('#nombres').val('');
+            $('#fechanac').val('');
+            $("#coddepa").val('00');
+            $("#codprov").val('00');
+            $("#coddist").val('00');
+            $('#direccion').val('');
         },
         error: function(err){
             swal("Error!", err, "error");
@@ -225,12 +235,14 @@ function ListarCliente(){
                     var th = document.createElement("th");      // TABLE HEADER.
                     th.innerHTML = col[i];
                     tr.appendChild(th);
+                    tr.classList.add('firstrow');
                 }
                 
                 for (var i = 0; i < myObjClient.length; i++) {
 
                     tr = table.insertRow(-1);
                     tr.id = myObjClient[i][col[0]];
+                    
 
                     for (var j = 0; j < col.length; j++) {
                         var tabCell = tr.insertCell(-1);
