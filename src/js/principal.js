@@ -118,16 +118,30 @@ function InsertarCliente(codcliente){
         sendType = "POST";
         sendURL = "src/path/Cliente.php/api/Cliente/Insertar";
         sendContentType = "application/json; charset=utf-8";
+        sendMethod = "POST";
     }else{
-        sendType = "PUT";
+        sendType = "POST";
         sendURL = "src/path/Cliente.php/api/Cliente/Modificar/"+sendCodcliente;
         sendContentType = "application/x-www-form-urlencoded";
+        sendMethod = "PUT";
+        /*
+        type: 'POST',
+        data: { _method: 'DELETE'},
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        
+        */
+        
     }
     $.ajax({
     	type: sendType,
         url: sendURL,
-        data: {nombres:sendNombres,fechanac:sendFechanac, ubigeo:sendUbigeo, direccion:sendDireccion},
+        data: {nombres:sendNombres,fechanac:sendFechanac, ubigeo:sendUbigeo, direccion:sendDireccion, _method: sendMethod},
         ContentType: sendContentType,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
         success: function(response){           
             swal("Correcto!!", response, "success");
             $('#codcliente').val('');
@@ -137,6 +151,29 @@ function InsertarCliente(codcliente){
             $("#codprov").val('00');
             $("#coddist").val('00');
             $('#direccion').val('');
+        },
+        error: function(err){
+            swal("Error!", err, "error");
+        }
+    });
+}
+
+function EliminarCliente(){
+    if(clientSelected == "" | clientSelected == "0" | clientSelected == undefined | clientSelected == null){
+        swal("Advertencia!!", "Para eliminar seleccione un Cliente...", "warning");
+        return false;
+    }
+    $.ajax({
+    	//type: "POST",
+        url: "src/path/Cliente.php/api/Cliente/Eliminar/"+clientSelected,
+        type: 'POST',
+        data: { _method: 'DELETE'},
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response){           
+           swal("Correcto!!", response, "success");
+           ListarCliente();
         },
         error: function(err){
             swal("Error!", err, "error");
@@ -277,24 +314,5 @@ function ListarCliente(){
                     }    
                 });
             });
-    });
-}
-
-function EliminarCliente(){
-    if(clientSelected == "" | clientSelected == "0" | clientSelected == undefined | clientSelected == null){
-        swal("Advertencia!!", "Para eliminar seleccione un Cliente...", "warning");
-        return false;
-    }
-    $.ajax({
-    	type: "DELETE",
-        url: "src/path/Cliente.php/api/Cliente/Eliminar/"+clientSelected,
-        ContentType:"application/json; charset=utf-8",
-        success: function(response){           
-           swal("Correcto!!", response, "success");
-           ListarCliente();
-        },
-        error: function(err){
-            swal("Error!", err, "error");
-        }
     });
 }

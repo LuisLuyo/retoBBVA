@@ -81,7 +81,7 @@ $app->post('/api/Cliente/Insertar', function(Request $request, Response $respons
 });
 
 // Actualizar Cliente
-$app->put('/api/Cliente/Modificar/{codcliente}', function(Request $request, Response $response){
+$app->post('/api/Cliente/Modificar/{codcliente}', function(Request $request, Response $response){
     $codcliente = $request->getAttribute('codcliente');
     $nombres = $request->getParam('nombres');
     $fechanac = $request->getParam('fechanac');
@@ -113,7 +113,7 @@ $app->put('/api/Cliente/Modificar/{codcliente}', function(Request $request, Resp
 
 
 // Borrar cliente
-$app->delete('/api/Cliente/Eliminar/{codcliente}', function(Request $request, Response $response){
+$app->post('/api/Cliente/Eliminar/{codcliente}', function(Request $request, Response $response){
     $codcliente = $request->getAttribute('codcliente');
     $sql = "DELETE FROM TABCLIENTE WHERE CODCLIENTE = $codcliente";
     try{
